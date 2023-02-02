@@ -7,3 +7,7 @@ from django.views.generic import FormView
 def chat_home(request):
     context = {}
     return render(request, 'chatapp/login.html', context=context)
+
+def join(request):
+    context = {}
+    return render(request, 'chatapp/join.html', context=context)

@@ -2,25 +2,51 @@
 
 {% block content %}
 {% load static %}
-    <h1>Login 화면</h1>
+    </br></br>
+    <div class="row justify-content-center" style="text-align: center; margin: 30px 0px 40px 0px;">
+        <h2>Collect Make room and Join room</h2>
+    </div>
+
     <div class="row justify-content-center">
-        <div class="card text-bg-dark align-items-center col-5" style="display: inline-block;">
-            <img src="{% static 'chatapp/imgs/newyork.png' %}" class="card-img" alt="..." style="height: 300px;">
-            <div class="card-img-overlay">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small>Last updated 3 mins ago</small></p>
+        <div class="card text-bg-dark align-items-center col-5" id="imgdiv1" style="margin:10px;">
+            <img src="{% static 'chatapp/imgs/makeroom.png' %}" class="card-img" id="img1" style="width:100%; height:100%;">
+            <div class="card-img-overlay" id="imgcontent1">
+                <h5 class="card-title">Make Room</h5>
+                <p class="card-text"><small>Do you have interesting subject?</small></p>
+                <h6 class="card-text">You can make chatting room.</h6>
             </div>
         </div>
 
-        <div class="card text-bg-dark align-items-center col-5" style="display: inline-block;">
-            <img src="{% static 'chatapp/imgs/doctor.png' %}" class="card-img" alt="..." style="height: 300px;">
-            <div class="card-img-overlay">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small>Last updated 3 mins ago</small></p>
+        <div class="card text-bg-dark align-items-center col-5" id="imgdiv2" style="margin:10px;">
+            <img src="{% static 'chatapp/imgs/joinroom.png' %}" class="card-img" id="img2" style="width:100%; height:100%;">
+            <div class="card-img-overlay" id="imgcontent2">
+                <h5 class="card-title">Join Room</h5>
+                <p class="card-text">Are you ready?</p>
+                <p class="card-text"><small>Let's go!</small></p>
             </div>
         </div>
     </div>
+</body>
+    
+<script>
+    $('#imgdiv1').mouseover(function(){
+        $('#img1').css('opacity',0.1);
+    })
 
+    $('#imgdiv1').mouseleave(function(){
+        $('#img1').css('opacity',1);
+    })
+
+    $('#imgdiv2').mouseover(function(){
+        $('#img2').css('opacity',0.1);
+    })
+
+    $('#imgdiv2').mouseleave(function(){
+        $('#img2').css('opacity',1);
+    })
+
+   
+    
+</script>
+</html>
 {% endblock %}
