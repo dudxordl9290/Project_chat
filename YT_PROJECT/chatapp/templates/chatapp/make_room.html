@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+</br></br>
+<div class="row justify-content-center" style="text-align: center; margin: 30px 0px 40px 0px;">
+    <h2 class="col-5">Make interesting Room!!</h2>
+</div>
+<div class="row justify-content-center">
+<form action="/db_insert_room/" method="POST" class="col-6">
+    {% csrf_token %}
+    <label for="exampleDataList1">Room Name</label>
+    <input type="text" name="room_name" class="form-control" list="datalistOptions" id="exampleDataList1" placeholder="Input room's title!" required >
+    </br>
+    <label for="exampleDataList2">Room Subject</label>
+    <input type="text" name="room_subject" class="form-control" list="datalistOptions" id="exampleDataList2" placeholder="What discusstion do you want?" required >
+    </br>
+    <label for="exampleDataList3">Set limitted participation</label>
+    <select name="limit_people" class="form-select" id="exampleDataList3" required>
+        {% for option in people_number %}
+            <option value="{{option}}">{{option}} 명</option>
+        {% endfor %}
+    </select>
+    </br>
+    <label for="exampleDataList4">Set Room's keeping</label>
+    <select name="limit_date" class="form-select" id="exampleDataList4" required>
+        {% for option in date_number %}
+            <option value="{{option}}">{{option}} 일</option>
+        {% endfor %}
+    </select>
+    </br>
+    <p class="row justify-content-center">
+        <input class="btn btn-primary col-2" type="submit" style="float:left; margin:5px" value="방만들기">
+        <a href="/join/" class="btn btn-secondary col-2" style="float:left; margin:5px">뒤로가기 </a>
+    </p>
+</form>
+</div>
+
+</body>
+</html>
+
+{% endblock %}

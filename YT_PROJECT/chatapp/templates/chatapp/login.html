@@ -3,15 +3,14 @@
 {% block content %}
     </br></br>
     <div class="row justify-content-center" style="text-align: center; margin: 30px 0px 40px 0px;">
-        <h2 class="col-5">Show your logic!!</h2>
+        <h2>Make your account and SHOW YOUR LOGIC!!!</h2>
     </div>
-    </br></br>
     <form class="row justify-content-center" name="account" action="/join/" method="POST">
     {% csrf_token %}
     <div class="col-4">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-md"> &nbsp Name &nbsp </span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-md">
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-md" required>
         </div>
         
         <div class="input-group input-group-sm mb-3">
