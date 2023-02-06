@@ -1,7 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from chatapp.forms import UserForm
+
 from django.http import HttpResponse
 from chatapp.models import Room
+
 
 # Create your views here.
 
@@ -9,10 +15,21 @@ def chat_home(request):
     context = {}
     return render(request, 'chatapp/login.html', context=context)
 
-def create_account(request):
-    context = {}
-    return render(request, 'chatapp/create_account.html', context=context)
+def signup(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)  # 사용자 인증
+            # login(request, user)  # 로그인
+            return render(request, '/chatapp/login.html', {})
+    else:
+        form = UserForm()
+    return render(request, '/chatapp/login.html', {})
 
+@login_required
 def join(request):
     context = {}
     return render(request, 'chatapp/join.html', context=context)
@@ -23,8 +40,8 @@ def room_list(request):
     return render(request, 'chatapp/room_list.html', context=context)
 
 def make_room(request):
-    context = {'people_number': range(2,21), 'date_number': range(1,11)}
-    return render(request, 'chatapp/make_room.html', context=context)
+    context = {}
+    return render(request, 'chatapp/create_account.html', context=context)
 
 def db_insert_room(request):
      print(request)
