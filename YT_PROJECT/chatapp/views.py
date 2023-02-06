@@ -15,6 +15,10 @@ def chat_home(request):
     context = {}
     return render(request, 'chatapp/login.html', context=context)
 
+def mk_account(request):
+    context = {}
+    return render(request, 'chatapp/signup.html', context=context)
+
 def signup(request):
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -22,12 +26,12 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)  # 사용자 인증
+            authenticate(username=username, password=raw_password)  # 사용자 인증
             # login(request, user)  # 로그인
-            return render(request, '/chatapp/login.html', {})
+            return redirect('chatapp/login.html')
     else:
         form = UserForm()
-    return render(request, '/chatapp/login.html', {})
+    return render(request, 'chatapp/signup.html', {'form':form})
 
 @login_required
 def join(request):
@@ -41,7 +45,7 @@ def room_list(request):
 
 def make_room(request):
     context = {}
-    return render(request, 'chatapp/create_account.html', context=context)
+    return render(request, 'chatapp/make_room.html', context=context)
 
 def db_insert_room(request):
      print(request)

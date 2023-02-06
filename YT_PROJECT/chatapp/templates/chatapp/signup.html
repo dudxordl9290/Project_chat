@@ -5,7 +5,7 @@
     <div class="row justify-content-center" style="text-align: center; margin: 30px 0px 40px 0px;">
         <h2>Make your account and SHOW YOUR LOGIC!!!</h2>
     </div>
-    <form class="row justify-content-center" action="/signup/" method="POST">
+    <form class="row justify-content-center" action="{% url 'chatapp:signup' %}" method="POST">
     {% csrf_token %}
         <div class="col-4">
             <div class="input-group input-group-sm mb-3">
