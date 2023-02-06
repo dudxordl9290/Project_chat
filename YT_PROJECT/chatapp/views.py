@@ -15,10 +15,6 @@ def chat_home(request):
     context = {}
     return render(request, 'chatapp/login.html', context=context)
 
-def mk_account(request):
-    context = {}
-    return render(request, 'chatapp/signup.html', context=context)
-
 def signup(request):
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -28,7 +24,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             authenticate(username=username, password=raw_password)  # 사용자 인증
             # login(request, user)  # 로그인
-            return redirect('chatapp/login.html')
+            return render(request,'chatapp/login.html',context={})
     else:
         form = UserForm()
     return render(request, 'chatapp/signup.html', {'form':form})
