@@ -5,8 +5,14 @@
     <div class="row justify-content-center" style="text-align: center; margin: 30px 0px 40px 0px;">
         <h2>Make your account and SHOW YOUR LOGIC!!!</h2>
     </div>
+
+    <div class="row justify-content-center">
+        {% include "chatapp/form_errors.html" %}
+    </div>
+
     <form class="row justify-content-center" action="{% url 'chatapp:signup' %}" method="POST">
     {% csrf_token %}
+        </br>
         <div class="col-4">
             <div class="input-group input-group-sm mb-3">
                 <label for="username" class="input-group-text" id="inputGroup-sizing-md">&nbsp&nbsp&nbsp ID &nbsp&nbsp&nbsp&nbsp</label>

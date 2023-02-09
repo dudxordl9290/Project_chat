@@ -47,7 +47,7 @@ def room_list(request):
     return render(request, 'chatapp/room_list.html', context=context)
 
 def make_room(request):
-    context = {}
+    context = {'people_number':range(2,21), 'date_number':range(1,11)}
     return render(request, 'chatapp/make_room.html', context=context)
 
 def db_insert_room(request):
