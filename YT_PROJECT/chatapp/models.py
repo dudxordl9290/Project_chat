@@ -11,12 +11,3 @@ class Room(models.Model):
     
     def __str__(self):
         return f"{self.room_name}, {self.room_subject}, {self.limit_people}, {self.limit_date} creat!!"
-
-class Account(models.Model):
-    chat_id = models.CharField(max_length=10)
-    chat_pw = models.CharField(max_length=20)
-    chat_email = models.EmailField()
-    chat_info = models.CharField(max_length=1000, default="정보없음.")
-
-    def __str__(self):
-        return f"{self.chat_id}, {self.chat_pw}, {self.chat_email}, {self.chat_info} creat!!"

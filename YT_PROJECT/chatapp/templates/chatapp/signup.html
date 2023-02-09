@@ -13,14 +13,16 @@
                 <input type="text" name='username' id="username" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-md" required>
             </div>
 
-            <div class="input-group input-group-sm mb-3">
+            <div class="input-group input-group-sm mb-3" id="pwdiv1">
                 <label for="password1" class="input-group-text" id="inputGroup-sizing-md">Password</label>
-                <input type="password" id="password1" name='password1' class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-md" required>
+                <input type="password" id="password1" name='password1' class="form-control" required>
+                <span id="pwstate1" style="width:100%; color:gray; font-size:10px;">최소 8 자, 하나 이상의 문자와 하나의 숫자를 입력해주세요.</span>
             </div>
-
-            <div class="input-group input-group-sm mb-3">
+            
+            <div class="input-group input-group-sm mb-3" id="pwdiv2">
                 <label for="password2" class="input-group-text" id="inputGroup-sizing-md">Password </br> Check</label>
                 <input type="password" id="password2" name='password2' class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-md" required>
+                <span id="pwstate2" style="width:100%; color:gray; font-size:10px;">위와 동일한 패스워드를 입력해주세요.</span>
             </div>
 
             <div class="input-group input-group-sm mb-3">
@@ -29,7 +31,7 @@
             </div>
 
             <p class="row justify-content-center">
-                <button type="submit" class="btn btn-secondary col-2">GO!</button>
+                <button type="submit" class="btn btn-secondary col-4">Make Account!</button>
             </p>
         </div>
     </form>
@@ -39,4 +41,42 @@
     
 </body>
 </html>
+
+<script>
+    $('#password1').focusout(function(){
+        var reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        $('#pwstate1').remove()
+        txt = $('#password1').val();
+        if( !reg.test(txt) ) {
+            $('#password1').val('');
+            $('#password2').val('');
+            $('#pwdiv1').append('<span id="pwstate1" style="width:100%; color:red; font-size:10px;">'+
+                                '다시 입력해주세요.(최소 8자, 하나 이상의 문자와 하나의 숫자)</span>')
+            return 0;
+        }
+        else {
+            $('#pwdiv1').append('<span id="pwstate1" style="width:100%; color:blue; font-size:10px;">'+
+                                '적합한 패스워드 입니다..</span>')
+            return 0;
+        }
+    });
+
+    $('#password2').focusout(function(){
+        pw1 = $('#password1').val()
+        pw2 = $('#password2').val()
+        $('#pwstate2').remove()
+        if(pw1 != pw2){
+            $('#password2').val('');
+            $('#pwdiv2').append('<span id="pwstate2" style="width:100%; color:red; font-size:10px;">'+
+                            '위의 패스워드와 다릅니다.</span>')
+            return 0;
+        }
+        else {
+            $('#pwdiv2').append('<span id="pwstate2" style="width:100%; color:blue; font-size:10px;">'+
+                                '위와 동일합니다.</span>')
+            return 0;
+        }
+    });
+
+</script>
 {% endblock %}

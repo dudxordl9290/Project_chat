@@ -11,10 +11,15 @@ from chatapp.models import Room
 
 # Create your views here.
 
+# home view (로그인 상태: join.html, 미로그인 상태:login.html)
 def chat_home(request):
-    context = {}
-    return render(request, 'chatapp/login.html', context=context)
+    print('#########')
+    if not request.user.is_authenticated:
+        return render(request, 'chatapp/login.html',{})
+    else:
+        return render(request, 'chatapp/join.html', {})
 
+#계정 생성 view
 def signup(request):
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -29,11 +34,13 @@ def signup(request):
         form = UserForm()
     return render(request, 'chatapp/signup.html', {'form':form})
 
+#방 참가 view
 @login_required
 def join(request):
     context = {}
     return render(request, 'chatapp/join.html', context=context)
 
+#방 리스트 view
 def room_list(request):
     room_object = Room.objects.all()
     context = {'objects': room_object}
