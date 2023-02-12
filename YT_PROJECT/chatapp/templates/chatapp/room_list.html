@@ -1,26 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>List Room</h1>
     </br>
     {% if objects %}
     <div class="row justify-content-center">
-    {% for item in objects %}
-    <a class="card" href="#" style="width: 60rem; text-decoration: none; color:black">
-        <div class="card-body">
-        <h5 class="card-title">{{item.room_name}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">주제 : {{item.room_subject}}</h6>
-        </br>
-        <p class="card-text" style="margin:0">인원 수 : 0 / {{item.limit_people}}</p>
-        <p class="card-text" style="margin:0">방장 : 000</p>
-        <p class="card-text">{{item.limit_date}}일 후 토론이 종료 됩니다.</p>
+        <div class="col-10">
+        {% for item in objects %}
+        <a class="card" href="#" style="width:21em; text-decoration: none; color:black; margin: 3px; float: left;">
+            <div class="card-body">
+            <h5 class="card-title">{{item.room_name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">주제 : {{item.room_subject}}</h6>
+            </br>
+            <p class="card-text" style="margin:0">인원 수 : 0 / {{item.limit_people}}</p>
+            <p class="card-text" style="margin:0">방장 : {{item.room_boss}}</p>
+            <p class="card-text">{{item.limit_date}}일 후 토론이 종료 됩니다.</p>
+            </div>
+        </a>
+        {% endfor %}
         </div>
-    </a>
-    {% endfor %}
     {% else %}
-    <div class="row justify-content-center">
-        <p class="col-4">채팅방이 없습니다.</p>
-    </div>
+        <div class="row justify-content-center">
+            <p class="col-4">채팅방이 없습니다.</p>
+        </div>
     {% endif %}
     </div>
 </body>

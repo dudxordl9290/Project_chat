@@ -6,7 +6,7 @@ class Room(models.Model):
     #room_name, room_subject, limit_people, limit_date
     room_name = models.CharField(max_length=30)
     room_subject = models.CharField(max_length=100)
-    room_boss = models.CharField(max_length=100)
+    room_boss = models.CharField(max_length=100, default='')
     limit_people = models.IntegerField(validators=[MinLengthValidator(2),MaxLengthValidator(20)])
     limit_date = models.IntegerField(validators=[MinLengthValidator(1),MaxLengthValidator(10)])
     

@@ -13,7 +13,6 @@ from chatapp.models import Room
 
 # home view (로그인 상태: join.html, 미로그인 상태:login.html)
 def chat_home(request):
-    print('#########')
     if not request.user.is_authenticated:
         return render(request, 'chatapp/login.html',{})
     else:
@@ -41,28 +40,31 @@ def join(request):
     return render(request, 'chatapp/join.html', context=context)
 
 #방 리스트 view
+@login_required
 def room_list(request):
     room_object = Room.objects.all()
     context = {'objects': room_object}
     return render(request, 'chatapp/room_list.html', context=context)
 
+@login_required
 def make_room(request):
-    context = {'people_number':range(2,21), 'date_number':range(1,11)}
-    return render(request, 'chatapp/make_room.html', context=context)
+    if request.method == 'GET':
+        context = {'people_number':range(2,21), 'date_number':range(1,11)}
+        return render(request, 'chatapp/make_room.html', context=context)
 
-def db_insert_room(request):
-     print(request)
-     if request.method == 'POST':
-        room_name = request.POST['room_name']
-        room_subject = request.POST['room_subject']
-        limit_people = request.POST['limit_people']
-        limit_date = request.POST['limit_date']
-        print(room_name, room_subject, limit_date, limit_people)
-        Room.objects.create(room_name=room_name, room_subject=room_subject, limit_people=limit_people, limit_date=limit_date)
+    elif request.method == 'POST':
+        print(request.user)
+        if request.method == 'POST':
+            room_name = request.POST['room_name']
+            room_subject = request.POST['room_subject']
+            limit_people = request.POST['limit_people']
+            limit_date = request.POST['limit_date']
 
-        context = {'result':'succeed'}
-        return render(request, 'chatapp/join.html',context=context)
+            Room.objects.create(room_name=room_name, room_subject=room_subject, room_boss=request.user,limit_people=limit_people, limit_date=limit_date)
+
+            context = {'result':'succeed'}
+            return render(request, 'chatapp/join.html',context=context)
      
-     else:
-        context = {}
-        return render(request, 'chatapp/make_room.html',context=context)
+        else:
+            context = {}
+            return render(request, 'chatapp/make_room.html',context=context)
