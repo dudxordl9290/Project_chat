@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# channels should write top >> 채널이 runserver 명령을 제어하여, 표준 Django 개발 서버를 channel 개발 서버로 대체하게 됨.
 INSTALLED_APPS = [
     'chatapp.apps.ChatappConfig',
     'django.contrib.admin',
