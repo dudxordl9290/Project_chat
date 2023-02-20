@@ -6,14 +6,13 @@
     <div class="row justify-content-center">
         <div class="col-10">
         {% for item in objects %}
-        <a class="card" href="#" style="width:21em; text-decoration: none; color:black; margin: 3px; float: left;">
+        <a class="card" href="/detail_room/{{item.id}}/" target="_self" style="width:21em; text-decoration: none; color:black; margin: 3px; float: left;">
             <div class="card-body">
-            <h5 class="card-title">{{item.room_name}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">주제 : {{item.room_subject}}</h6>
+            <h5 class="card-title">{{item.room_title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">주제 : {{item.room_content}}</h6>
             </br>
-            <p class="card-text" style="margin:0">인원 수 : 0 / {{item.limit_people}}</p>
-            <p class="card-text" style="margin:0">방장 : {{item.room_boss}}</p>
-            <p class="card-text">{{item.limit_date}}일 후 토론이 종료 됩니다.</p>
+            <p class="card-text" style="margin:0">방장 : {{item.room_creater}}</p>
+            <p class="card-text">{{item.room_date}}</p>
             </div>
         </a>
         {% endfor %}
