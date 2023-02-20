@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <!-- {% if roominfo %}
-        <img src="{{ roominfo.room_image }}">
-    {% endif %} -->
-    <h1>detail</h1>
+    {% if roominfo %}
+        <img src="{{ roominfo.room_image |safe }}">
+    {% endif %}
 {% endblock %}

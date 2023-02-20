@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-10">
         {% for item in objects %}
-        <a class="card" href="/detail_room/{{item.id}}/" style="width:21em; text-decoration: none; color:black; margin: 3px; float: left;">
+        <a class="card" href="/detail_room/{{item.id}}/" target="_self" style="width:21em; text-decoration: none; color:black; margin: 3px; float: left;">
             <div class="card-body">
             <h5 class="card-title">{{item.room_title}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">주제 : {{item.room_content}}</h6>

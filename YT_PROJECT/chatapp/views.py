@@ -74,4 +74,4 @@ def detail_room(request, pk):
     openroom = Room.objects.filter(id=pk)
     context = {"roominfo":openroom}
     print(context)
-    return render(request, 'chatapp/datail_room.html', context=context)
+    return render(request,'chatapp/detail_room.html', context=context)
