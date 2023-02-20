@@ -127,3 +127,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Login succeed
 LOGIN_REDIRECT_URL = '/join/'
+
+#media setting
+MEDEA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'

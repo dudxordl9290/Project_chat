@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'chatapp'
 
@@ -12,6 +14,6 @@ urlpatterns = [
 
     path('join/',views.join, name='join'),
     path('room_list/',views.room_list),
-    path('make_room/',views.make_room, name='make_room/'),
-    # path('db_insert_room/', views.db_insert_room),
-]
+    path('make_room/',views.make_room, name='make_room'),
+    path('detail_room/<int:pk>/', views.detail_room, name='detail_room'),
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
