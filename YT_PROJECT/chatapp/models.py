@@ -1,14 +1,22 @@
 from django.db import models
-from django.core.validators import MinLengthValidator, MaxLengthValidator
+from datetime import datetime
 
 # Create your models here.
 class Room(models.Model):
     #room_name, room_subject, limit_people, limit_date
-    room_name = models.CharField(max_length=30)
-    room_subject = models.CharField(max_length=100)
-    room_boss = models.CharField(max_length=100, default='')
-    limit_people = models.IntegerField(validators=[MinLengthValidator(2),MaxLengthValidator(20)])
-    limit_date = models.IntegerField(validators=[MinLengthValidator(1),MaxLengthValidator(10)])
+    room_title = models.CharField(null=False, max_length=30)
+    room_content = models.CharField(null=False, max_length=2000)
+    room_image = models.ImageField(null=True, blank=True)
+    room_creater = models.CharField(null=False, max_length=100)
+    room_date = models.DateTimeField(null=False, default=datetime.today().strftime("%Y-%m-%d %H:%M:%S"))
     
     def __str__(self):
-        return f"{self.room_name}, {self.room_subject}, {self.limit_people}, {self.limit_date} creat!!"
+        return f"{self.room_title}, {self.room_content}, {self.room_creater}, {self.room_date} creat!!"
+    
+class Review(models.Model):
+    review_content = models.CharField(null=False, max_length=2000)
+    review_creater = models.CharField(null=False, max_length=100)
+    review_date = models.IntegerField(null=False, default=datetime.today().strftime("%Y-%m-%d %H:%M:%S"))
+
+    def __str__(self):
+        return f"{self.review_content}, {self.review_creater}, {self.review_date} creat!!"
