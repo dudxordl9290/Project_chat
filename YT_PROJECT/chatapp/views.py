@@ -58,10 +58,10 @@ def make_room(request):
         if request.method == 'POST':
             room_title = request.POST['room_title']
             room_content = request.POST['room_content']
-            # room_creater = request.POST['room_creater']
+            room_image = request.FILES['room_image']
             room_date = datetime.today().strftime("%Y/%m/%d %H:%M:%S")  
 
-            Room.objects.create(room_title=room_title, room_content=room_content, room_creater=request.user, room_date=room_date)
+            Room.objects.create(room_title=room_title, room_content=room_content, room_image=room_image, room_creater=request.user, room_date=room_date)
 
             context = {'result':'succeed'}
             return render(request, 'chatapp/join.html',context=context)
@@ -71,7 +71,7 @@ def make_room(request):
             return render(request, 'chatapp/make_room.html',context=context)
 
 def detail_room(request, pk):
-    openroom = Room.objects.filter(id=pk)
-    context = {"roominfo":openroom}
+    room_info = Room.objects.get(id=pk)
+    context = {"objects":room_info}
     print(context)
     return render(request,'chatapp/detail_room.html', context=context)
