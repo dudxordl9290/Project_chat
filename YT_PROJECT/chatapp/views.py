@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login
 from chatapp.forms import UserForm
 
 from django.http import HttpResponse
-from chatapp.models import Room
+from chatapp.models import Room, Review
 
 from datetime import datetime
 
@@ -72,6 +72,24 @@ def make_room(request):
 
 def detail_room(request, pk):
     room_info = Room.objects.get(id=pk)
-    context = {"objects":room_info}
+
+    try:
+        review_info = Review.objects.get(review_room=pk)
+    except:
+        review_info = ''
+
+    context = {"room":room_info, "review":review_info}
     print(context)
     return render(request,'chatapp/detail_room.html', context=context)
+
+def make_review(request, pk):
+    if request.method == 'POST':
+        review_content = request.POST['review_content']
+        review_date = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
+
+        print(review_content, review_date)
+
+        Review.objects.create(review_room=pk, review_content=review_content, review_creater=request.user, review_date=review_date)
+    
+    return render(request, 'chatapp/detail_room.html',{})
+        

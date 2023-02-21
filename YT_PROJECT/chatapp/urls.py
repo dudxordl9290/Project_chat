@@ -1,8 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-from django.conf import settings
-from django.conf.urls.static import static
+
 
 app_name = 'chatapp'
 
@@ -16,4 +15,6 @@ urlpatterns = [
     path('room_list/',views.room_list),
     path('make_room/',views.make_room, name='make_room'),
     path('detail_room/<int:pk>/', views.detail_room, name='detail_room'),
+
+    path('make_review/<int:pk>/', views.make_review, name='make_review'),
 ]
