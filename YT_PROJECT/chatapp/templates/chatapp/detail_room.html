@@ -8,11 +8,8 @@
 
     <div class="col-8">
         <div class="card">
-            <h4>{{room.content}}</h4>
             <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                <p class="card-text">{{room.room_content}}
                 </p>
                 <hr width ="100%" size = "3">
             </div>
@@ -51,7 +48,7 @@
 <div class="row justify-content-center">
     <div style="height: 50px;"></div>
     <hr width ="100%" size = "3">
-    <h3 style="text-align: center; margin-bottom: 20px;"> Review </h3>
+    <h3 class="col-8" style="text-align: left; margin-bottom: 20px;"> Review </h3>
 
     <div class="col-8">
         <button type="button" class="btn btn-light" style="margin:left;" data-bs-toggle="collapse" 
@@ -73,11 +70,13 @@
 
     <div class="col-8">
         {% if review %}
-        <div class="card">
-            <p class="card-text">{{review.review_content}}</p>
-            <p class="card-text text-end">작성자:{{review.review_creater}}
-            <br> {{review.review_date}}</p>
-        </div>
+            {% for n in review %}
+                <div class="card" style="border-color: rgb(184, 222, 240); margin-bottom: 5px;  padding: 20px;">
+                    <p class="card-text">{{n.review_content}}</p>
+                    <p class="card-text text-end" style="font-size: 10px;">작성자:{{n.review_creater}}
+                    <br> {{n.review_date}}</p>
+                </div>
+            {% endfor %}        
         {% else %}
         <hr width ="100%" size = "3">
         <div height="150px">
@@ -87,10 +86,6 @@
         
        
     </div>
-
-
-
-
 
 </div>
 

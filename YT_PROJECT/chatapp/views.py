@@ -74,12 +74,12 @@ def detail_room(request, pk):
     room_info = Room.objects.get(id=pk)
 
     try:
-        review_info = Review.objects.get(review_room=pk)
+        review_info = Review.objects.filter(review_room=pk).order_by('-review_date')
     except:
-        review_info = ''
+        review_info = []
 
     context = {"room":room_info, "review":review_info}
-    print(context)
+
     return render(request,'chatapp/detail_room.html', context=context)
 
 def make_review(request, pk):
@@ -87,9 +87,7 @@ def make_review(request, pk):
         review_content = request.POST['review_content']
         review_date = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
 
-        print(review_content, review_date)
-
         Review.objects.create(review_room=pk, review_content=review_content, review_creater=request.user, review_date=review_date)
     
-    return render(request, 'chatapp/detail_room.html',{})
+    return redirect(f'/detail_room/{pk}/')
         
