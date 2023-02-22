@@ -13,11 +13,11 @@
     </br>
 
     <label for="exampleDataList2">Room Content</label>
-    <input type="text" name="room_content" class="form-control" list="datalistOptions" id="exampleDataList2" placeholder="What discusstion do you want?" required >
+    <textarea type="text" name="room_content" class="form-control" list="datalistOptions" id="exampleDataList2" placeholder="Input room's content" required ></textarea>
     </br>
 
-    <label for="exampleDataList3">Use Image</label>
-    <input type="file" name="room_image" multiple>
+    <label for="exampleDataList3">Use Image(less than 3)</label>
+    <P><input type="file" id="imagelist" name="room_image" accept=".gif, .jpeg, .png, .jpg" multiple></P>
     </br>
     <p class="row justify-content-center">
         <input class="btn btn-primary col-2" type="submit" style="float:left; margin:5px" value="방만들기">
@@ -28,5 +28,15 @@
 
 </body>
 </html>
+
+<script>
+$('#imagelist').focusout(function(){
+    if ($('#imagelist')[0].files.length > 3) {
+        alert("You can upload only less than 3!!!")
+        $('#imagelist').val('');
+    }
+});
+</script>
+
 
 {% endblock %}

@@ -16,6 +16,7 @@ urlpatterns = [
     path('make_room/',room_views.make_room, name='make_room'),
     path('detail_room/<int:pk>/', room_views.detail_room, name='detail_room'),
     path('delete_room/<int:pk>/', room_views.delete_room, name='delete_room'),
+    path('modify_room/<int:pk>/', room_views.modify_room, name='modify_room'),
 
     path('make_review/<int:pk>/', review_views.make_review, name='make_review'),
 ]

@@ -42,25 +42,34 @@ def join(request):
 #방 리스트 view
 @login_required
 def room_list(request):
-    room_object = Room.objects.all()
+    room_object = Room.objects.all().order_by('-room_date')
     context = {'objects': room_object}
     return render(request, 'chatapp/room_list.html', context=context)
 
+# 방 생성
 @login_required
 def make_room(request):
+    
     if request.method == 'GET':
         context = {}
         return render(request, 'chatapp/make_room.html', context=context)
 
     elif request.method == 'POST':
-        print(request.user)
+        print(request.FILES.getlist('room_image'))
         if request.method == 'POST':
             room_title = request.POST['room_title']
             room_content = request.POST['room_content']
-            room_image = request.FILES['room_image']
+            room_image = []
+            for n in [0,1,2]:
+                try:
+                    room_image.append(request.FILES.getlist('room_image')[n])
+                except:
+                    room_image.append('')
             room_date = datetime.today().strftime("%Y/%m/%d %H:%M:%S")  
 
-            Room.objects.create(room_title=room_title, room_content=room_content, room_image=room_image, room_creater=request.user, room_date=room_date)
+            Room.objects.create(room_title=room_title, room_content=room_content, 
+                                room_image1=room_image[0], room_image2=room_image[1], room_image3=room_image[2], 
+                                room_creater=request.user, room_date=room_date)
 
             context = {'result':'succeed'}
             return render(request, 'chatapp/join.html',context=context)
@@ -69,20 +78,50 @@ def make_room(request):
             context = {}
             return render(request, 'chatapp/make_room.html',context=context)
 
+#방 상세페이지
 def detail_room(request, pk):
     room_info = Room.objects.get(id=pk)
 
     try:
         review_info = Review.objects.filter(review_room=pk).order_by('-review_date')
     except:
-        review_info = []
+        review_info = ''
 
+    print(room_info)
     context = {"room":room_info, "review":review_info, "user":str(request.user)}
 
     return render(request,'chatapp/detail_room.html', context=context)
 
+# 방 삭제
 def delete_room(request, pk):
     Room.objects.get(id=pk).delete()
 
     return redirect('/room_list/')
+
+# 방 수정
+def modify_room(request, pk):
+    room_info = Room.objects.get(id=pk)
+
+    if request.method == 'GET':
+        context = {'room':room_info}
+
+        return render(request,'chatapp/modify_room.html', context=context)
+    
+    else:
+        room_image = []
+        for n in [0,1,2]:
+            try:
+                room_image.append(request.FILES.getlist('room_image')[n])
+            except:
+                room_image.append('')
+        
+        room_info.room_image1=room_image[0]
+        room_info.room_image2=room_image[1]
+        room_info.room_image3=room_image[2]
+        room_info.room_title = request.POST['room_title']
+        room_info.room_content = request.POST['room_content']
+
+        room_info.save()
+
+        return redirect('/detail_room/'+str(pk))
         

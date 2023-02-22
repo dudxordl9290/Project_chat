@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+</br></br>
+<div class="row justify-content-center" style="text-align: center; margin: 30px 0px 40px 0px;">
+    <h2 class="col-5">Make interesting Room!!</h2>
+</div>
+<div class="row justify-content-center">
+<form action="/modify_room/{{room.id}}/" method="POST" enctype="multipart/form-data" class="col-6">
+    {% csrf_token %}
+    <label for="exampleDataList1">Room Title</label>
+    <input type="text" name="room_title" class="form-control" list="datalistOptions" id="exampleDataList1" value="{{room.room_title}}" required >
+    </br>
+
+    <label for="exampleDataList2">Room Content</label>
+    <textarea type="text" name="room_content" class="form-control" list="datalistOptions" id="exampleDataList2" required >{{room.room_content}}</textarea>
+    </br>
+
+    <label for="exampleDataList3">Use Image(less than 3)</label>
+    <P><input type="file" id="imagelist" name="room_image" accept=".gif, .jpeg, .png, .jpg" multiple></P>
+    </br>
+    <p class="row justify-content-center">
+        <input class="btn btn-primary col-2" type="submit" style="float:left; margin:5px" value="수정하기">
+    </p>
+</form>
+</div>
+
+</body>
+</html>
+
+<script>
+    $('#imagelist').focusout(function(){
+        if ($('#imagelist')[0].files.length > 3) {
+            alert("You can upload only less than 3!!!")
+            $('#imagelist').val('');
+        }
+    });
+    </script>
+
+{% endblock %}
