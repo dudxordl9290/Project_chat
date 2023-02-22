@@ -89,4 +89,10 @@
 
 </div>
 
+{% if room.room_creater == user %}
+<div class="row justify-content-center">
+    <a href="/delete_room/{{room.id}}/" style="color:white; margin: 3px 0 10px 0;" class="btn btn-danger">Delete Post</a>
+</div>
+{% endif %}
+
 {% endblock %}

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse, reverse_lazy
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
@@ -78,16 +77,12 @@ def detail_room(request, pk):
     except:
         review_info = []
 
-    context = {"room":room_info, "review":review_info}
+    context = {"room":room_info, "review":review_info, "user":str(request.user)}
 
     return render(request,'chatapp/detail_room.html', context=context)
 
-def make_review(request, pk):
-    if request.method == 'POST':
-        review_content = request.POST['review_content']
-        review_date = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
+def delete_room(request, pk):
+    Room.objects.get(id=pk).delete()
 
-        Review.objects.create(review_room=pk, review_content=review_content, review_creater=request.user, review_date=review_date)
-    
-    return redirect(f'/detail_room/{pk}/')
+    return redirect('/room_list/')
         
