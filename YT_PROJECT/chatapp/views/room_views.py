@@ -79,8 +79,12 @@ def make_room(request):
             return render(request, 'chatapp/make_room.html',context=context)
 
 #방 상세페이지
+@login_required
 def detail_room(request, pk):
     room_info = Room.objects.get(id=pk)
+
+    img = [room_info.room_image1, room_info.room_image2, room_info.room_image3]
+    img_count = [x for x in img if x!='']
 
     try:
         review_info = Review.objects.filter(review_room=pk).order_by('-review_date')
@@ -88,17 +92,24 @@ def detail_room(request, pk):
         review_info = ''
 
     print(room_info)
-    context = {"room":room_info, "review":review_info, "user":str(request.user)}
+    context = {"room":room_info, "img_count":len(img_count) ,"review":review_info, "user":str(request.user)}
 
     return render(request,'chatapp/detail_room.html', context=context)
 
 # 방 삭제
+@login_required
 def delete_room(request, pk):
-    Room.objects.get(id=pk).delete()
+    room_info = Room.objects.get(id=pk)
+    room_info.delete()
+
+    Review.objects.filter(review_room=pk).delete()
+
+    
 
     return redirect('/room_list/')
 
 # 방 수정
+@login_required
 def modify_room(request, pk):
     room_info = Room.objects.get(id=pk)
 
@@ -108,20 +119,22 @@ def modify_room(request, pk):
         return render(request,'chatapp/modify_room.html', context=context)
     
     else:
-        room_image = []
-        for n in [0,1,2]:
-            try:
-                room_image.append(request.FILES.getlist('room_image')[n])
-            except:
-                room_image.append('')
-        
-        room_info.room_image1=room_image[0]
-        room_info.room_image2=room_image[1]
-        room_info.room_image3=room_image[2]
-        room_info.room_title = request.POST['room_title']
-        room_info.room_content = request.POST['room_content']
+        if request.user == room_info.room_creater:
+            room_image = []
+            for n in [0,1,2]:
+                try:
+                    room_image.append(request.FILES.getlist('room_image')[n])
+                except:
+                    room_image.append('')
+            
+            room_info.room_image1=room_image[0]
+            room_info.room_image2=room_image[1]
+            room_info.room_image3=room_image[2]
+            room_info.room_title = request.POST['room_title']
+            room_info.room_content = request.POST['room_content']
 
-        room_info.save()
+            room_info.save()
 
+            return redirect('/detail_room/'+str(pk))
         return redirect('/detail_room/'+str(pk))
         

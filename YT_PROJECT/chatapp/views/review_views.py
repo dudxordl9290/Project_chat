@@ -15,3 +15,9 @@ def make_review(request, pk):
         Review.objects.create(review_room=pk, review_content=review_content, review_creater=request.user, review_date=review_date)
     
     return redirect(f'/detail_room/{pk}/')
+
+def delete_review(request, pk, id):
+    review_info = Review.objects.filter(review_room=pk, id=id)
+    review_info.delete()
+
+    return redirect(f'/detail_room/{pk}/')

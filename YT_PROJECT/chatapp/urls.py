@@ -19,4 +19,5 @@ urlpatterns = [
     path('modify_room/<int:pk>/', room_views.modify_room, name='modify_room'),
 
     path('make_review/<int:pk>/', review_views.make_review, name='make_review'),
+    path('delete_review/<int:pk>/<int:id>/', review_views.delete_review, name='delete_review'),
 ]
