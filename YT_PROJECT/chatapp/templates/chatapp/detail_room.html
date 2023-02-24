@@ -80,8 +80,10 @@
         </div>
     </div>
 
+    <!--댓글/대댓글-->
     <div class="col-8">
         {% if review %}
+            <!--댓글-->
             {% for n in review %}
                 <div class="card" style="border-color: rgb(184, 222, 240); margin-top: 15px; padding: 20px; padding-bottom: 0;">
                     <div style="width:100%; float:left">
@@ -111,20 +113,28 @@
                     </div>
                     <br>
                 </div>
-                <!-- {% if rereview.0.review_id == n.id %}
-                    {% for m in rereview.0 %}
-                    <div>
-                        <div style="width:10%; float:left; text-align: right;">└ &nbsp;</div>
-                        <div style="width:90%; float:left; background: rgb(241, 247, 250);">
-                            <p class="card-text text-start" style="font-size:10px; width: 70%; float: left; word-break:break-all;">
-                                ddd
+
+                <!--대댓글-->
+                {% for v in rereview %}
+                    {% for m in v %}
+                    {% if m.review_id == n.id %}
+                    <div class="row" style="width:100%; margin-top: 3px;">
+                        <div class="col-1" style="float:left; text-align: right;">└ &nbsp;</div>
+                        <div class="col-11" style="float:left; background: rgb(241, 247, 250);">
+                            <p class="card-text text-start" style="font-size:15px; width: 70%; float: left; word-break:break-all;">
+                                {{m.review_content}}
                             </p>
-                            <span class="card-text text-end" style="font-size:10px; width: 30%; float: right;">작성자:{{n.review_creater}} / {{n.review_date}}</span>
+                            <p class="card-text text-end" style="font-size:10px; width: 25%; float: left;">작성자:{{n.review_creater}} <br> {{n.review_date}}</p>
+                            <!--대댓글 삭제-->
+                            {% if m.review_creater == user %}
+                            <a href="/delete_re_review/{{room.id}}/{{n.id}}/{{m.id}}/" class="btn btn-sm"  
+                                    style="color:red; font-size:10px; width: 5%; float: right;"> X </a>
+                            {% endif %}
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
-                {% endif %} -->
-                <br>
+                {% endfor %}
             {% endfor %}        
         {% else %}
         <hr width ="100%" size = "3">
@@ -135,6 +145,7 @@
         <br> 
     </div>
     <hr width ="100%" size = "3">
+    <!--댓글/대댓글 끝-->
 
 </div>
 
@@ -151,7 +162,7 @@
 </html>
 
 <script>
-    var img_count = {{img_count}};
+    var img_count = "{{img_count}}";
     
     $(document).ready(function() {
         if(img_count > 1) {

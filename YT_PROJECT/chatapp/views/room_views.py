@@ -92,13 +92,13 @@ def detail_room(request, pk):
         review_info = ''
 
     rereview_list = []
-    for i in range(len(review_info)):
-        try:
-            rereview_list.append(ReReview.objects.filter(review_room=pk, review_id=review_info[i].id).order_by('-review_date'))
-        except:
-            rereview_list.append('')
-
-    print(rereview_list[0])
+    if review_info != '':
+        for re in review_info:
+            try:
+                rereview_list.append(ReReview.objects.filter(review_room=pk, review_id=re.id).order_by('-review_date'))
+            except:
+                rereview_list.append('')
+    
     context = {"room":room_info, "img_count":len(img_count) ,"review":review_info, "rereview":rereview_list, "user":str(request.user)}
 
     return render(request,'chatapp/detail_room.html', context=context)

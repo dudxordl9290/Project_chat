@@ -21,5 +21,6 @@ urlpatterns = [
     path('make_review/<int:pk>/', review_views.make_review, name='make_review'),
     path('delete_review/<int:pk>/<int:id>/', review_views.delete_review, name='delete_review'),
 
-    path('make_re_review/<int:pk>/<int:id>/', review_views.make_re_review, name='make_re_review')
+    path('make_re_review/<int:pk>/<int:id>/', review_views.make_re_review, name='make_re_review'),
+    path('delete_re_review/<int:pk>/<int:re>/<int:id>/', review_views.delete_re_review, name='delete_re_review')
 ]
