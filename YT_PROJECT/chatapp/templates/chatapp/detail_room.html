@@ -102,35 +102,28 @@
                             답글
                         </span>
                         <div class="collapse" id="collapseWidthExample2">
-                            <form action="/make_review/{{room.id}}/" method="POST">
+                            <form action="/make_re_review/{{room.id}}/{{n.id}}/" method="POST">
                                 {% csrf_token %}
-                                <input class="form-control" placeholder="Write here your Review" name="review_content" style="float: left; width: 90%;" required>
+                                <input class="form-control" placeholder="Write here your Review" name="rereview_content" style="float: left; width: 90%;" required>
                                 <button type="submit" style="float: right; color:black; margin: 3px 0 10px 0; width: 10%;" class="btn btn-outline-primary btn-sm">Post review</button>
                             </form>
                         </div>
                     </div>
                     <br>
                 </div>
-
-                <div>
-                    <div style="width:10%; float:left; text-align: right;">└ &nbsp;</div>
-                    <div style="width:90%; float:left; background: rgb(241, 247, 250);">
-                        <p class="card-text text-start" style="font-size:10px; width: 70%; float: left; word-break:break-all;">
-                            
-                        </p>
-                        <span class="card-text text-end" style="font-size:10px; width: 30%; float: right;">작성자:{{n.review_creater}} / {{n.review_date}}</span>
+                <!-- {% if rereview.0.review_id == n.id %}
+                    {% for m in rereview.0 %}
+                    <div>
+                        <div style="width:10%; float:left; text-align: right;">└ &nbsp;</div>
+                        <div style="width:90%; float:left; background: rgb(241, 247, 250);">
+                            <p class="card-text text-start" style="font-size:10px; width: 70%; float: left; word-break:break-all;">
+                                ddd
+                            </p>
+                            <span class="card-text text-end" style="font-size:10px; width: 30%; float: right;">작성자:{{n.review_creater}} / {{n.review_date}}</span>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div>
-                    <div style="width:10%; float:left; text-align: right;">└ &nbsp;</div>
-                    <div style="width:90%; float:left; background: rgb(241, 247, 250);">
-                        <p class="card-text text-start" style="font-size:10px; width: 70%; float: left; word-break:break-all;">
-                            
-                        </p>
-                        <span class="card-text text-end" style="font-size:10px; width: 30%; float: right;">작성자:{{n.review_creater}} / {{n.review_date}}</span>
-                    </div>
-                </div>
+                    {% endfor %}
+                {% endif %} -->
                 <br>
             {% endfor %}        
         {% else %}

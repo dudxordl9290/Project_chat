@@ -37,3 +37,13 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.review_room}, {self.review_content}, {self.review_creater}, {self.review_date} creat!!"
+    
+class ReReview(models.Model):
+    review_room = models.IntegerField(null=False)
+    review_id = models.IntegerField(null=False)
+    review_content = models.CharField(null=False, max_length=2000)
+    review_creater = models.CharField(null=False, max_length=100)
+    review_date = models.CharField(null=True, max_length=100)
+
+    def __str__(self):
+        return f"{self.review_room}, {self.review_id}, {self.review_content}, {self.review_creater}, {self.review_date} creat!!"

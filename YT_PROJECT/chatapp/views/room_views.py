@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login
 from chatapp.forms import UserForm
 
 from django.http import HttpResponse
-from chatapp.models import Room, Review
+from chatapp.models import Room, Review, ReReview
 
 from datetime import datetime
 
@@ -91,8 +91,15 @@ def detail_room(request, pk):
     except:
         review_info = ''
 
-    print(room_info)
-    context = {"room":room_info, "img_count":len(img_count) ,"review":review_info, "user":str(request.user)}
+    rereview_list = []
+    for i in range(len(review_info)):
+        try:
+            rereview_list.append(ReReview.objects.filter(review_room=pk, review_id=review_info[i].id).order_by('-review_date'))
+        except:
+            rereview_list.append('')
+
+    print(rereview_list[0])
+    context = {"room":room_info, "img_count":len(img_count) ,"review":review_info, "rereview":rereview_list, "user":str(request.user)}
 
     return render(request,'chatapp/detail_room.html', context=context)
 
@@ -103,8 +110,6 @@ def delete_room(request, pk):
     room_info.delete()
 
     Review.objects.filter(review_room=pk).delete()
-
-    
 
     return redirect('/room_list/')
 
