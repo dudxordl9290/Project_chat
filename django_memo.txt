@@ -1,0 +1,77 @@
+[기본 세팅]
+@ version 
+python 3.9.8 (python --version)
+django 3.2.16 (python -m django --version)
+
+<command>
+django 설치
+> pip install django==3.2.16
+
+project 생성
+> django-admin startproject <프로젝트명-testproject> (=python -m django startproject <프로젝트명>)
+
+app 생성
+> python manage.py startapp <앱 명-testapp>
+
+ 1. testapp > views 함수 설정
+    from django.shortcuts import render
+    from django.http import HttpResponse
+    
+    def home(request):
+	return HttpResponse('Test 출력')
+
+ 2. testapp > urls.py 생성 (project와 app의 url 연결)
+    from django.urls import path
+    from . import views
+
+    urlpatterns = [
+        path('',views.chat_home)
+    ]
+
+  3. testproject > urls.py (외부 url 연결)
+    from django.contrib import admin
+    from django.urls import path, include
+
+   urlpatterns = [
+       path('admin/', admin.site.urls),
+       path('',include('chatapp.urls')),
+   ]
+
+  4. setting.py 세팅 (앱 등록)
+
+   INSTALLED_APPS = [
+    'testapp.apps.TestappConfig',
+    .....
+    ]
+
+
+
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+[Model-DB 연결]
+#Database 설치(Model 수정시 다시 해줄것)
+python manage.py makemigrations
+python manage.py migrate
+
+  => db.sqlite3 파일 생성, migrations폴더에 0001_initial.py(migration 객체) 생성
+
+[마이그레이션 삭제]
+python -m manage.py makemigrations
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+[슈퍼유저 생성]
+python manage.py createsuperuser
+python manage.py chagepassword
+(python manage.py changepassword <유저이름> : 계정 변경)
+
+
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+[django shell 실행]
+python manage.py shell
+
+
+    

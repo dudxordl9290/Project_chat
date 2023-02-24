@@ -71,7 +71,7 @@
 
     <!--input review / collapse-->
     <div class="col-8">
-        <div class="collapse collapse-horizontal" id="collapseWidthExample">
+        <div class="collapse" id="collapseWidthExample">
         <form action="/make_review/{{room.id}}/" method="POST">
             {% csrf_token %}
             <textarea class="form-control" placeholder="Write here your Review" name="review_content" height="100%" style="float: left;" required></textarea>
@@ -83,7 +83,7 @@
     <div class="col-8">
         {% if review %}
             {% for n in review %}
-                <div class="card" style="border-color: rgb(184, 222, 240); margin-bottom: 5px; padding: 20px;">
+                <div class="card" style="border-color: rgb(184, 222, 240); margin-top: 15px; padding: 20px; padding-bottom: 0;">
                     <div style="width:100%; float:left">
                         <p class="card-text">{{n.review_content}}
                             {% if n.review_creater == user %}
@@ -94,7 +94,44 @@
                         <p class="card-text text-end" style="font-size:10px;">작성자:{{n.review_creater}}
                         <br> {{n.review_date}}</p>
                     </div>
+                    <br>
+
+                    <div>
+                        <span type="button" style="margin:left; color:blue; font-size: 10px;" data-bs-toggle="collapse"
+                            data-bs-target="#collapseWidthExample2" aria-expanded="false" aria-controls="collapseWidthExample2">
+                            답글
+                        </span>
+                        <div class="collapse" id="collapseWidthExample2">
+                            <form action="/make_review/{{room.id}}/" method="POST">
+                                {% csrf_token %}
+                                <input class="form-control" placeholder="Write here your Review" name="review_content" style="float: left; width: 90%;" required>
+                                <button type="submit" style="float: right; color:black; margin: 3px 0 10px 0; width: 10%;" class="btn btn-outline-primary btn-sm">Post review</button>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
                 </div>
+
+                <div>
+                    <div style="width:10%; float:left; text-align: right;">└ &nbsp;</div>
+                    <div style="width:90%; float:left; background: rgb(241, 247, 250);">
+                        <p class="card-text text-start" style="font-size:10px; width: 70%; float: left; word-break:break-all;">
+                            
+                        </p>
+                        <span class="card-text text-end" style="font-size:10px; width: 30%; float: right;">작성자:{{n.review_creater}} / {{n.review_date}}</span>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <div style="width:10%; float:left; text-align: right;">└ &nbsp;</div>
+                    <div style="width:90%; float:left; background: rgb(241, 247, 250);">
+                        <p class="card-text text-start" style="font-size:10px; width: 70%; float: left; word-break:break-all;">
+                            
+                        </p>
+                        <span class="card-text text-end" style="font-size:10px; width: 30%; float: right;">작성자:{{n.review_creater}} / {{n.review_date}}</span>
+                    </div>
+                </div>
+                <br>
             {% endfor %}        
         {% else %}
         <hr width ="100%" size = "3">
