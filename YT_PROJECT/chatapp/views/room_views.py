@@ -116,15 +116,18 @@ def delete_room(request, pk):
 # 방 수정
 @login_required
 def modify_room(request, pk):
-    room_info = Room.objects.get(id=pk)
-
+   
     if request.method == 'GET':
+        room_info = Room.objects.get(id=pk)
         context = {'room':room_info}
 
+        print('get방식',room_info)
         return render(request,'chatapp/modify_room.html', context=context)
     
     else:
-        if request.user == room_info.room_creater:
+        room_info = Room.objects.get(id=pk)
+        if str(request.user) == str(room_info.room_creater):
+            print(room_info.room_creater)
             room_image = []
             for n in [0,1,2]:
                 try:
@@ -141,5 +144,5 @@ def modify_room(request, pk):
             room_info.save()
 
             return redirect('/detail_room/'+str(pk))
-        return redirect('/detail_room/'+str(pk))
-        
+        else:
+            return redirect('/detail_room/'+str(pk))
