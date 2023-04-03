@@ -16,7 +16,7 @@ def chat_home(request):
     if not request.user.is_authenticated:
         return render(request, 'chatapp/login.html',{})
     else:
-        return render(request, 'chatapp/join.html', {})
+        return render(request, 'chatapp/room_list.html', {})
 
 #계정 생성 view
 def signup(request):
