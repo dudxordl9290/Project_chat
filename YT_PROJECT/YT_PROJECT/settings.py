@@ -126,7 +126,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #Login succeed
-LOGIN_REDIRECT_URL = '/join/'
+LOGIN_REDIRECT_URL = '/room_list/'
 
 #media setting
 MEDIA_URL = '/media/'

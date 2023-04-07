@@ -11,12 +11,12 @@ from datetime import datetime
 
 # Create your views here.
 
-# home view (로그인 상태: join.html, 미로그인 상태:login.html)
+# home view (로그인 상태: room_list.html, 미로그인 상태:login.html)
 def chat_home(request):
     if not request.user.is_authenticated:
         return render(request, 'chatapp/login.html',{})
     else:
-        return render(request, 'chatapp/room_list.html', {})
+        return redirect('/room_list/')
 
 #계정 생성 view
 def signup(request):
@@ -72,7 +72,7 @@ def make_room(request):
                                 room_creater=request.user, room_date=room_date)
 
             context = {'result':'succeed'}
-            return render(request, 'chatapp/join.html',context=context)
+            return redirect('/room_list/')
      
         else:
             context = {}

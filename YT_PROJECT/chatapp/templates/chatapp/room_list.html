@@ -2,21 +2,51 @@
 
 {% block content %}
 {% load static %}
-    </br>
     <div class="row justify-content-center">
-        <a href="/make_room/" class="col-4" style="text-align: center; text-decoration: none;">
-            <img src="{% static 'chatapp/imgs/plus.png' %}" style="height:50px; width:50px">
-            <p style="font-size: 8px; ">방만들기</p>
-            </img>
-        </a>
+        <div class="col-8" style="text-align: center;">
+            <a href="/make_room/" style="text-decoration: none;">
+                <button type="button" class="btn btn-outline-primary" style="border-radius: 50%;">+</button>
+            </a>
+            </br>
+            <span style="font-size: 10px;">Make room!</span>
+        </div>
     </div>
-    <p></p>
+
+    </br>
+        <div class="col-3" id="ex_box" style="float:left; text-align:center; margin:10px 0px 0px 30px; position: relative;">
+            <div class="row justify-content-center" style="border: 1px solid #b3b5b8; color:blue; font-weight: bold;"> 조회수 TOP5  
+                <p></p>
+                <div class="list-group col-11">
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                      The current link item
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+                    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                    <a class="list-group-item list-group-item-action">A disabled link item</a>
+                  </div>
+            </div>
+            </br>
+            <div class="row justify-content-center" style="border: 1px solid #b3b5b8; color:blue; font-weight: bold;"> 좋아요 TOP5 
+                <p></p>
+                <div class="list-group col-11">
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                      The current link item
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+                    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                    <a class="list-group-item list-group-item-action">A disabled link item</a>
+                </div>
+            </div>
+        </div>
+
+    <div class="row justify-content-center" id="mainbox">
     {% if objects %}
-    <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-11">
         {% for item in objects %}
         <a class="card" href="/detail_room/{{item.id}}" target="_self" 
-                style="text-decoration: none; color:black; margin: 10px; padding: 15px;">
+                style="text-decoration: none; color:black; margin: 10px 10px 0px 0px; padding: 15px;">
             <div class="card-body">
             <h4 class="card-title">{{item.room_title}}</h5>
             <br>
@@ -32,7 +62,20 @@
         </div>
     {% endif %}
     </div>
+
 </body>
 </html>
+
+<script>
+
+$(document).ready(function(){
+  var currentPosition = parseInt($("#ex_box").css("top"));
+  $(window).scroll(function() {
+    var position = $(window).scrollTop(); 
+    $("#ex_box").stop().animate({"top":position+currentPosition+"px"},500);
+  });
+});
+
+</script>
 
 {% endblock %}

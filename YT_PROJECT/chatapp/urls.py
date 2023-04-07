@@ -12,7 +12,7 @@ urlpatterns = [
     path('signup/',room_views.signup, name='signup'),
 
     path('join/',room_views.join, name='join'),
-    path('room_list/',room_views.room_list),
+    path('room_list/',room_views.room_list,name='room_list'),
     path('make_room/',room_views.make_room, name='make_room'),
     path('detail_room/<int:pk>/', room_views.detail_room, name='detail_room'),
     path('delete_room/<int:pk>/', room_views.delete_room, name='delete_room'),
