@@ -43,13 +43,15 @@ def join(request):
 @login_required
 def room_list(request):
     room_object = Room.objects.all().order_by('-room_date')
-    context = {'objects': room_object}
+    room_view_best = Room.objects.all().order_by('-room_view')[:5]
+    room_like_best = Room.objects.all().order_by('-room_like')[:5]
+
+    context = {'objects': room_object,'views': room_view_best, 'likes':room_like_best}
     return render(request, 'chatapp/room_list.html', context=context)
 
 # 방 생성
 @login_required
 def make_room(request):
-    
     if request.method == 'GET':
         context = {}
         return render(request, 'chatapp/make_room.html', context=context)
@@ -81,11 +83,19 @@ def make_room(request):
 #방 상세페이지
 @login_required
 def detail_room(request, pk):
+    #room 정보 가져오기
     room_info = Room.objects.get(id=pk)
 
+    #room_view 업데이트 하기
+    view_plus = room_info.room_view + 1
+    room_info.room_view = view_plus
+    room_info.save()
+
+    #이미지 가져오기
     img = [room_info.room_image1, room_info.room_image2, room_info.room_image3]
     img_count = [x for x in img if x!='']
 
+    #리뷰 가져오기
     try:
         review_info = Review.objects.filter(review_room=pk).order_by('-review_date')
     except:
