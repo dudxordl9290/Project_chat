@@ -1,7 +1,9 @@
 # Project_chat(ver_1.0)
 자신의 생각을 공유하는 웹 기반 커뮤니티 입니다.
 
-사용 언어 : Django, javascript, jquery
+사용 언어 : Django, javascript
+사용 오픈소스 : bootstrap, jquery
+버전 : python 3.8, 3.9
 
 [주요 기능]
 회원가입, 로그인 기능
