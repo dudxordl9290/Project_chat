@@ -1,4 +1,4 @@
-FROM python:3
+FROM django:4.0
 
 WORKDIR /usr/src/app
 
@@ -8,4 +8,3 @@ RUN pip install -r requirements.txt
 COPY . .
 
 EXPOSE 8000
-
