@@ -1,4 +1,4 @@
-FROM django:4.0
+FROM django
 
 WORKDIR /usr/src/app
 
