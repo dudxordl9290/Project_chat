@@ -1,4 +1,4 @@
-FROM python:3.4
+FROM django:onbuild
 
 WORKDIR /usr/src/app
 
