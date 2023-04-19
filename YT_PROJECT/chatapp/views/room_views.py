@@ -52,12 +52,12 @@ def room_list(request):
 # 방 생성
 @login_required
 def make_room(request):
-    current = datetime.now()
     if request.method == 'GET':
         context = {}
         return render(request, 'chatapp/make_room.html', context=context)
 
     elif request.method == 'POST':
+        current = time
         if request.method == 'POST':
             room_title = request.POST['room_title']
             room_content = request.POST['room_content']
