@@ -93,10 +93,10 @@
 
                     <div>
                         <span type="button" style="margin:left; color:blue; font-size: 10px;" data-bs-toggle="collapse"
-                            data-bs-target="#collapseWidthExample2" aria-expanded="false" aria-controls="collapseWidthExample2">
+                            data-bs-target="#collapse{{n.id}}" aria-expanded="false" aria-controls="collapseWidthExample2">
                             답글
                         </span>
-                        <div class="collapse" id="collapseWidthExample2">
+                        <div class="collapse" id="collapse{{n.id}}">
                             <form action="/make_re_review/{{room.id}}/{{n.id}}/" method="POST">
                                 {% csrf_token %}
                                 <input class="form-control" placeholder="Write here your Review" name="rereview_content" style="float: left; width: 90%;" required>
@@ -117,7 +117,7 @@
                             <p class="card-text text-start" style="font-size:15px; width: 70%; float: left; word-break:break-all;">
                                 {{m.review_content}}
                             </p>
-                            <p class="card-text text-end" style="font-size:10px; width: 25%; float: left;">작성자:{{n.review_creater}} <br> {{n.review_date}}</p>
+                            <p class="card-text text-end" style="font-size:10px; width: 25%; float: left;">작성자:{{m.review_creater}} <br> {{m.review_date}}</p>
                             <!--대댓글 삭제-->
                             {% if m.review_creater == user %}
                             <a href="/delete_re_review/{{room.id}}/{{n.id}}/{{m.id}}/" class="btn btn-sm"  
