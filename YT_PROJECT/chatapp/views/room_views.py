@@ -7,7 +7,7 @@ from chatapp.forms import UserForm
 from django.http import HttpResponse
 from chatapp.models import Room, Review, ReReview
 
-import time
+import datetime
 
 # Create your views here.
 
@@ -57,7 +57,7 @@ def make_room(request):
         return render(request, 'chatapp/make_room.html', context=context)
 
     elif request.method == 'POST':
-        current = time
+        current = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
         if request.method == 'POST':
             room_title = request.POST['room_title']
             room_content = request.POST['room_content']
