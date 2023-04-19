@@ -10,7 +10,7 @@ from datetime import datetime
 def make_review(request, pk):
     if request.method == 'POST':
         review_content = request.POST['review_content']
-        review_date = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
+        review_date = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
         Review.objects.create(review_room=pk, review_content=review_content, review_creater=request.user, review_date=review_date)
     
@@ -25,7 +25,7 @@ def delete_review(request, pk, id):
 def make_re_review(request, pk, id):
     if request.method == 'POST':
         review_content = request.POST['rereview_content']
-        review_date = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
+        review_date = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
         ReReview.objects.create(review_room=pk, review_id=id, review_content=review_content, review_creater=request.user, review_date=review_date)
 
