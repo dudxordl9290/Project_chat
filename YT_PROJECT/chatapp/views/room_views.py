@@ -52,12 +52,12 @@ def room_list(request):
 # 방 생성
 @login_required
 def make_room(request):
+    current = datetime.now()
     if request.method == 'GET':
         context = {}
         return render(request, 'chatapp/make_room.html', context=context)
 
     elif request.method == 'POST':
-        print(request.FILES.getlist('room_image'))
         if request.method == 'POST':
             room_title = request.POST['room_title']
             room_content = request.POST['room_content']
@@ -67,7 +67,7 @@ def make_room(request):
                     room_image.append(request.FILES.getlist('room_image')[n])
                 except:
                     room_image.append('')
-            room_date = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+            room_date = current.strftime("%Y/%m/%d %H:%M:%S")
 
             Room.objects.create(room_title=room_title, room_content=room_content, 
                                 room_image1=room_image[0], room_image2=room_image[1], room_image3=room_image[2], 
