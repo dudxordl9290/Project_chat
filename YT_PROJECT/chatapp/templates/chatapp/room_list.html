@@ -16,13 +16,15 @@
         <div class="col-3" id="ex_box" style="float:left; text-align:center; margin:10px 0px 0px 30px; position: relative;">
             <div class="row justify-content-center" style="border: 1px solid #b3b5b8; color:blue; font-weight: bold;"> 조회수 TOP5  
                 <p></p>
+                {% if objects %}
                 <div class="list-group col-11">
-                    <a href="/detail_room/{{views.0.id}}" class="list-group-item list-group-item-action">{{views.0.room_title|truncatechars:15}}</a>
-                    <a href="/detail_room/{{views.1.id}}" class="list-group-item list-group-item-action">{{views.1.room_title|truncatechars:15}}</a>
-                    <a href="/detail_room/{{views.2.id}}" class="list-group-item list-group-item-action">{{views.2.room_title|truncatechars:15}}</a>
-                    <a href="/detail_room/{{views.3.id}}" class="list-group-item list-group-item-action">{{views.3.room_title|truncatechars:15}}</a>
-                    <a href="/detail_room/{{views.4.id}}" class="list-group-item list-group-item-action">{{views.4.room_title|truncatechars:15}}</a>
+                    {% for view in views %}
+                    <a href="/detail_room/{{views.0.id}}" class="list-group-item list-group-item-action">{{view.room_title|truncatechars:15}}</a>
+                    {% endfor %}
                   </div>
+                  {% else %}
+                  <p class="col-4" style="text-align: center; color:black; font-size:10px">채팅방이 없습니다.</p>
+                  {% endif %}
             </div>
             </br>
             <!-- <div class="row justify-content-center" style="border: 1px solid #b3b5b8; color:blue; font-weight: bold;"> 좋아요 TOP5 
