@@ -7,7 +7,7 @@ from chatapp.forms import UserForm
 from django.http import HttpResponse
 from chatapp.models import Room, Review, ReReview
 
-from datetime import datetime
+import time
 
 # Create your views here.
 

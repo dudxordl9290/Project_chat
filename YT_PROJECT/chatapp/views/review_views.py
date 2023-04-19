@@ -4,11 +4,11 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from chatapp.models import Room, Review, ReReview
-from datetime import datetime
+import time
 
 @login_required
 def make_review(request, pk):
-    current = datetime.now()
+    current = time
     if request.method == 'POST':
         review_content = request.POST['review_content']
         review_date = current.strftime("%Y/%m/%d %H:%M:%S")
@@ -24,7 +24,7 @@ def delete_review(request, pk, id):
     return redirect(f'/detail_room/{pk}/')
 
 def make_re_review(request, pk, id):
-    current = datetime.now()
+    current = time
     if request.method == 'POST':
         review_content = request.POST['rereview_content']
         review_date = current.strftime("%Y/%m/%d %H:%M:%S")
