@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -26,7 +25,7 @@ SECRET_KEY = 'django-insecure-i5fbluj$n228685p1az2^xulc*ak32hlo#k^ik_mqzrd)-ipu)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1','172.104.64.84']
 
 
 # Application definition
@@ -131,4 +130,4 @@ LOGIN_REDIRECT_URL = '/room_list/'
 
 #media setting
 MEDIA_URL = '/media/'
-MEDEA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDEA_ROOT = os.path.join(BASE_DIR,'media')
