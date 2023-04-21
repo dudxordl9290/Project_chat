@@ -1,0 +1,15 @@
+[Unit]
+Description=uWSGI service
+After=syslog.target
+
+[Service]
+ExecStart=uwsgi --http :8000 --home /home/jyt/myvenv/ --chdir /home/jyt/srv/Project_chat/YT_PROJECT --wsgi-file YT_PROJECT/wsgi.py
+
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
