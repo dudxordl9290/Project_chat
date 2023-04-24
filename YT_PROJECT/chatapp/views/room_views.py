@@ -105,7 +105,7 @@ def detail_room(request, pk):
     if review_info != '':
         for re in review_info:
             try:
-                rereview_list.append(ReReview.objects.filter(review_room=pk, review_id=re.id).order_by('-review_date'))
+                rereview_list.append(ReReview.objects.filter(review_room=pk, review_id=re.id).order_by('review_date'))
             except:
                 rereview_list.append('')
     
