@@ -95,11 +95,12 @@
                             data-bs-target="#collapse{{n.id}}" aria-expanded="false" aria-controls="collapseWidthExample2">
                             답글
                         </span>
-                        <div class="collapse" id="collapse{{n.id}}">
+                        <div class="collapse col-12" id="collapse{{n.id}}">
                             <form action="/make_re_review/{{room.id}}/{{n.id}}/" method="POST">
                                 {% csrf_token %}
-                                <input class="form-control" placeholder="Write here your Review" name="rereview_content" style="float: left; width: 90%;" required>
-                                <button type="submit" style="float: right; color:black; margin: 3px 0 10px 0; width: 10%;" class="btn btn-outline-primary btn-sm">Post review</button>
+                                <input class="form-control  col-12" placeholder="Write here your Review" name="rereview_content" style="float: left;" required>
+                                <button type="submit" style="float: right; color:black; margin: 3px 0 10px 0; font-size: .5em;" 
+                                    class="btn btn-outline-primary btn-sm">Post</button>
                             </form>
                         </div>
                     </div>
@@ -112,7 +113,7 @@
                     {% if m.review_id == n.id %}
                     <div class="row" style="width:100%; margin-top: 3px;">
                         <div class="col-1" style="float:left; text-align: right;">└ &nbsp;</div>
-                        <div class="col-11" style="float:left; background: rgb(241, 247, 250);">
+                        <div class="col-10" style="float:right; background: rgb(241, 247, 250);">
                             <p class="card-text text-start col-10" style="font-size:15px; float: left; word-break:break-all;">
                                 {{m.review_content}}
                             </p>
