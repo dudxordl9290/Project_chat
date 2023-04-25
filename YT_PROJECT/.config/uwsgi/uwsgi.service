@@ -3,7 +3,8 @@ Description=uWSGI service
 After=syslog.target
 
 [Service]
-ExecStart=sudo /home/jyt/myvenv/bin/uwsgi -i /home/jyt/srv/Project_chat/YT_PROJECT/.config/uwsgi/mysite.ini
+#ExecStart=sudo /home/jyt/myvenv/bin/uwsgi -i /home/jyt/srv/Project_chat/YT_PROJECT/.config/uwsgi/mysite.ini
+ExecStart=uwsgi --http :8000 --home /home/jyt/myvenv/ --chdir /home/jyt/srv/Project_chat/YT_PROJECT --wsgi-file YT_PROJECT/wsgi.py
 
 Restart=always
 KillSignal=SIGQUIT
