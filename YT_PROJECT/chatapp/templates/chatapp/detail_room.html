@@ -9,7 +9,7 @@
     <div class="col-8">
         <div class="card">
             <div class="card-body">
-                <p class="card-text">{{room.room_content}}
+                <p class="card-text">{{room.room_content|linebreaksbr}}
                 </p>
                 <hr width ="100%" size = "3">
             </div>
@@ -80,7 +80,7 @@
             {% for n in review %}
                 <div class="card" style="border-color: rgb(184, 222, 240); margin-top: 15px; padding: 20px; padding-bottom: 0;">
                     <div style="width:100%; float:left">
-                        <p class="card-text col-12" >{{n.review_content}}
+                        <p class="card-text col-12" >{{n.review_content|linebreaksbr}}
                             {% if n.review_creater == user %}
                             <a href="/delete_review/{{room.id}}/{{n.id}}" class="btn btn-sm" 
                                     style="color:red; float: right;">X</a>
@@ -115,7 +115,7 @@
                         <div class="col-1" style="float:left; text-align: right;">└ &nbsp;</div>
                         <div class="col-10" style="float:right; background: rgb(241, 247, 250);">
                             <p class="card-text text-start col-10" style="font-size:15px; float: left; word-break:break-all;">
-                                {{m.review_content}}
+                                {{m.review_content|linebreaksbr}}
                             </p>
                             {% if m.review_creater == user %}
                             <a href="/delete_re_review/{{room.id}}/{{n.id}}/{{m.id}}/" class="btn btn-sm text-end"  
@@ -158,6 +158,7 @@
     var img_count = "{{img_count}}";
     
     $(document).ready(function() {
+        console.log($('.card-text').text())
         if(img_count > 1) {
             $('#slideicon').append('<button type="button" data-bs-target="#carouselExampleDark" '+
                         'data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>'+
