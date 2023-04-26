@@ -19,4 +19,6 @@ http://172.104.64.84:8000  (~23.6월말)
 리뷰 테이블
 
 [배포]
-local <-> git <-> server (데비안10)
+server <-> nginx <-> uwsgi <-> Django
+source code : local <-> git <-> server (데비안10)
+
