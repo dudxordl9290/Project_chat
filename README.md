@@ -1,7 +1,7 @@
-http://172.104.64.84/  (~23.6월말)
+http://172.104.64.84:8000  (~23.6월말)
 
 # Project_chat(ver_1.0)
-자신의 생각을 공유하는 B급 감성 웹 기반 커뮤니티 입니다.
+자신의 생각을 공유하는 웹/앱 커뮤니티 입니다.
 
 사용 언어 : Django, javascript
 사용 오픈소스 : bootstrap, jquery
@@ -19,4 +19,6 @@ http://172.104.64.84/  (~23.6월말)
 리뷰 테이블
 
 [배포]
-local <-> git <-> server (데비안10)
+server <-> nginx <-> uwsgi <-> Django
+source code : local <-> git <-> server (데비안10)
+
