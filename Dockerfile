@@ -1,4 +1,4 @@
-FROM django:onbuild
+FROM python:3.8
 
 WORKDIR /usr/src/app
 
@@ -9,4 +9,6 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["python3.8", "manage.py", "runserver", "0.0.0.0:8000"]
+WORKDIR ./YT_PROJECT
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
